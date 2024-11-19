@@ -1,0 +1,325 @@
+<!-- component -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script defer src="https://unpkg.com/alpinejs@3.2.3/dist/cdn.min.js"></script>
+    <link rel="icon" href="image/favicon.ico" type="image/x-icon">
+    <title>PDWCH</title> <!-- Ubah judul di sini -->
+    <style>
+        #loadingOverlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.75);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 1000;
+          opacity: 1; /* Set opasitas awal */
+          transition: opacity 1s ease-in-out; /* Transisi opasitas */
+        }
+      </style>
+  </head>
+  <body class="h-screen bg-blue-50" style="background-color: #3d3d3d;">
+    <div id="loadingOverlay" class="absolute inset-0 bg-black z-50 flex items-center justify-center">
+        <div class="flex items-center">
+          <span class="text-3xl mr-4 text-white">Loading</span>
+          <svg class="animate-spin h-8 w-8 text-gray-800" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+            </path>
+          </svg>
+        </div>
+      </div>
+    <main class="p-5 bg-light-blue">
+      <div class="flex justify-center items-start my-2">
+        <div class="w-full sm:w-10/12 md:w-1/2 my-1">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-xl font-semibold text-white">INFO BOT PDWCH</h2>
+            <a href="https://wa.me/628386881557?text=%23daftar" target="_blank" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                BOT WHATSAPP PEDIAWCH
+            </a>
+          </div>
+          <ul class="flex flex-col">
+            <li class="bg-white my-2 shadow-lg" x-data="accordion(1)">
+                <h2
+                    @click="handleClick()"
+                    class="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer"
+                >
+                    <span>CARA MEMBUAT RDP & VPS DI BOT WHATSAPP PEDIAWCH</span>
+                    <svg
+                        :class="handleRotate()"
+                        class="fill-current text-green-700 h-6 w-6 transform transition-transform duration-500"
+                        viewBox="0 0 20 20"
+                    >
+                        <path d="M13.962,8.885l-3.736,3.739c-0.086,0.086-0.201,0.13-0.314,0.13S9.686,12.71,9.6,12.624l-3.562-3.56C5.863,8.892,5.863,8.611,6.036,8.438c0.175-0.173,0.454-0.173,0.626,0l3.25,3.247l3.426-3.424c0.173-0.172,0.451-0.172,0.624,0C14.137,8.434,14.137,8.712,13.962,8.885 M18.406,10c0,4.644-3.763,8.406-8.406,8.406S1.594,14.644,1.594,10S5.356,1.594,10,1.594S18.406,5.356,18.406,10 M17.521,10c0-4.148-3.373-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.148,17.521,17.521,14.147,17.521,10"></path>
+                    </svg>
+                </h2>
+                <div
+                    x-ref="tab"
+                    :style="handleToggle()"
+                    class="border-l-2 border-green-600 overflow-hidden max-h-0 duration-500 transition-all"
+                >
+                <p class="p-3 text-gray-900">
+                    <strong><i class="fas fa-desktop"></i> RDP</strong><br>
+                    <i class="fas fa-check-circle"></i> Format command: #createrdp|negara|size|namardp|sistemoperasi|perpanjangotomatis ya/tidak<br>
+                    <i class="fas fa-check-circle"></i> Contoh: #createrdp|singapura|4c8gi|rdpwp|win10|ya<br>
+                    <br>
+                    <strong><i class="fas fa-cloud"></i> VPS</strong><br>
+                    <i class="fas fa-check-circle"></i> Format command: #createvps|negara|size|namavps|sistemoperasi|perpanjangotomatis ya/tidak<br>
+                    <i class="fas fa-check-circle"></i> Contoh: #createvps|singapura|4c8gi|vpswp|ubuntu20|ya<br>
+                    <br>
+                    <strong><i class="fas fa-exclamation-circle"></i> NOTE</strong><br>
+                    <i class="fas fa-check-circle"></i> Jika status perpanjang otomatis kamu pilih "ya". Maka otomatis jika ip RDP/VPS kamu sudah habis, otomatis akan diperpanjang dan memotong saldo kamu. Pastikan saldo cukup sesuai size yang dipilih<br>
+                    <i class="fas fa-check-circle"></i> List Negara, Size, Sistem Operasi sudah ada di #rdp dan #vps
+                </p>
+                </div>
+            </li>
+            <li class="bg-white my-2 shadow-lg" x-data="accordion(2)">
+                <h2
+                    @click="handleClick()"
+                    class="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer"
+                >
+                    <span>CARA PERPANJANG RDP & VPS DI BOT WHATSAPP PEDIAWCH</span>
+                    <svg
+                        :class="handleRotate()"
+                        class="fill-current text-green-700 h-6 w-6 transform transition-transform duration-500"
+                        viewBox="0 0 20 20"
+                    >
+                        <path d="M13.962,8.885l-3.736,3.739c-0.086,0.086-0.201,0.13-0.314,0.13S9.686,12.71,9.6,12.624l-3.562-3.56C5.863,8.892,5.863,8.611,6.036,8.438c0.175-0.173,0.454-0.173,0.626,0l3.25,3.247l3.426-3.424c0.173-0.172,0.451-0.172,0.624,0C14.137,8.434,14.137,8.712,13.962,8.885 M18.406,10c0,4.644-3.763,8.406-8.406,8.406S1.594,14.644,1.594,10S5.356,1.594,10,1.594S18.406,5.356,18.406,10 M17.521,10c0-4.148-3.373-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.148,17.521,17.521,14.147,17.521,10"></path>
+                    </svg>
+                </h2>
+                <div
+                    x-ref="tab"
+                    :style="handleToggle()"
+                    class="border-l-2 border-green-600 overflow-hidden max-h-0 duration-500 transition-all"
+                >
+                    <p class="p-3 text-gray-900">
+                        <strong><i class="fas fa-desktop"></i> RDP</strong><br>
+                        <i class="fas fa-check-circle"></i> Format command: #perpanjangrdp|iprdpnya|ya/tidak<br>
+                        <i class="fas fa-check-circle"></i> Contoh: #perpanjangrdp|128.199.199.199:50123|tidak<br>
+                        <br>
+                        <strong><i class="fas fa-cloud"></i> VPS</strong><br>
+                        <i class="fas fa-check-circle"></i> Format command: #perpanjangvps|ipvpsnya|ya/tidak<br>
+                        <i class="fas fa-check-circle"></i> Contoh: #perpanjangvps|128.199.199.199|tidak<br>
+                        <br>
+                        <strong><i class="fas fa-exclamation-circle"></i> NOTE RDP & VPS</strong><br>
+                        <i class="fas fa-check-circle"></i> Fungsi ini hanya untuk merubah status ip kamu mau diperpanjang atau tidak.<br>
+                        <i class="fas fa-check-circle"></i> Jika sebelumnya ip kamu statusnya "ya", maka tinggal kamu rubah menjadi "tidak". Maka otomatis ip kamu akan berubah status perpanjangnya. bisa di cek di #listakun untuk melihat statusnya sudah berubah atau belum
+                    </p>
+                </div>
+            </li>
+            <li class="bg-white my-2 shadow-lg" x-data="accordion(3)">
+                <h2
+                    @click="handleClick()"
+                    class="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer"
+                >
+                    <span>CARA RECREATE RDP & VPS DI BOT WHATSAPP PEDIAWCH</span>
+                    <svg
+                        :class="handleRotate()"
+                        class="fill-current text-green-700 h-6 w-6 transform transition-transform duration-500"
+                        viewBox="0 0 20 20"
+                    >
+                        <path d="M13.962,8.885l-3.736,3.739c-0.086,0.086-0.201,0.13-0.314,0.13S9.686,12.71,9.6,12.624l-3.562-3.56C5.863,8.892,5.863,8.611,6.036,8.438c0.175-0.173,0.454-0.173,0.626,0l3.25,3.247l3.426-3.424c0.173-0.172,0.451-0.172,0.624,0C14.137,8.434,14.137,8.712,13.962,8.885 M18.406,10c0,4.644-3.763,8.406-8.406,8.406S1.594,14.644,1.594,10S5.356,1.594,10,1.594S18.406,5.356,18.406,10 M17.521,10c0-4.148-3.373-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.148,17.521,17.521,14.147,17.521,10"></path>
+                    </svg>
+                </h2>
+                <div
+                    x-ref="tab"
+                    :style="handleToggle()"
+                    class="border-l-2 border-green-600 overflow-hidden max-h-0 duration-500 transition-all"
+                >
+                    <p class="p-3 text-gray-900">
+                        <strong><i class="fas fa-desktop"></i> RDP</strong><br>
+                        <i class="fas fa-check-circle"></i> Format command: #recreaterdp|iprdpnya|sistemoperasi<br>
+                        <i class="fas fa-check-circle"></i> Contoh: #recreaterdp|128.199.199.199:50123|win10<br>
+                        <br>
+                        <strong><i class="fas fa-cloud"></i> VPS</strong><br>
+                        <i class="fas fa-check-circle"></i> Format command: #recreatevps|ipvpsnya|sistemoperasi<br>
+                        <i class="fas fa-check-circle"></i> Contoh: #recreatevps|128.199.199.199|ubuntu24<br>
+                        <br>
+                        <strong><i class="fas fa-exclamation-circle"></i> NOTE RDP & VPS</strong><br>
+                        <i class="fas fa-check-circle"></i> Fungsi ini untuk mengganti ip rdp atau vps kamu dengan ip dan sistem operasi yang baru. Misal sebelumnya 128.199.199.199:50123 maka akan terganti 134.199.199.128:50123. Dan misal sebelumnya win10 mau diganti ke win2022 bisa<br>
+                        <i class="fas fa-check-circle"></i> Fungsi ini dikenakan biaya Rp.1000 setiap kali kamu melakukan recreate pada RDP & VPS. Karena untuk menghindari spam pengulangan pembuatan secara terus menerus<br>
+                        <i class="fas fa-check-circle"></i> Pastikan lakukan recreate RDP & VPS sewajarnya saja, jika terdeteksi melakukan spam. Akan saya banned data akun di BOT dan saldo hangus
+                    </p>
+                </div>
+            </li>
+            <li class="bg-white my-2 shadow-lg" x-data="accordion(4)">
+                <h2
+                    @click="handleClick()"
+                    class="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer"
+                >
+                    <span>CARA START, STOP, RESTART RDP & VPS DI BOT WHATSAPP PEDIAWCH</span>
+                    <svg
+                        :class="handleRotate()"
+                        class="fill-current text-green-700 h-6 w-6 transform transition-transform duration-500"
+                        viewBox="0 0 20 20"
+                    >
+                        <path d="M13.962,8.885l-3.736,3.739c-0.086,0.086-0.201,0.13-0.314,0.13S9.686,12.71,9.6,12.624l-3.562-3.56C5.863,8.892,5.863,8.611,6.036,8.438c0.175-0.173,0.454-0.173,0.626,0l3.25,3.247l3.426-3.424c0.173-0.172,0.451-0.172,0.624,0C14.137,8.434,14.137,8.712,13.962,8.885 M18.406,10c0,4.644-3.763,8.406-8.406,8.406S1.594,14.644,1.594,10S5.356,1.594,10,1.594S18.406,5.356,18.406,10 M17.521,10c0-4.148-3.373-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.148,17.521,17.521,14.147,17.521,10"></path>
+                    </svg>
+                </h2>
+                <div
+                    x-ref="tab"
+                    :style="handleToggle()"
+                    class="border-l-2 border-green-600 overflow-hidden max-h-0 duration-500 transition-all"
+                >
+                    <p class="p-3 text-gray-900">
+                        <i class="fas fa-desktop"></i><strong> START RDP</strong><br>
+                        <i class="fas fa-check-circle"></i> Format command start: #startrdp|iprdpnya<br>
+                        <i class="fas fa-check-circle"></i> Contoh: #startrdp|128.199.199.199:50123<br>
+                        <br>
+                        <i class="fas fa-desktop"></i><strong> STOP RDP</strong><br>
+                        <i class="fas fa-check-circle"></i> Format command stop: #stoprdp|iprdpnya<br>
+                        <i class="fas fa-check-circle"></i> Contoh: #stoprdp|128.199.199.199:50123<br>
+                        <br>
+                        <i class="fas fa-desktop"></i><strong> RESTART RDP</strong><br>
+                        <i class="fas fa-check-circle"></i> Format command restart: #restartrdp|iprdpnya<br>
+                        <i class="fas fa-check-circle"></i> Contoh: #restartrdp|128.199.199.199:50123<br>
+                        <br>
+                        <i class="fas fa-cloud"></i><strong> START VPS</strong><br>
+                        <i class="fas fa-check-circle"></i> Format command start: #startvps|iprdpnya<br>
+                        <i class="fas fa-check-circle"></i> Contoh: #startvps|128.199.199.199<br>
+                        <br>
+                        <i class="fas fa-cloud"></i><strong> STOP VPS</strong><br>
+                        <i class="fas fa-check-circle"></i> Format command stop: #stopvps|iprdpnya<br>
+                        <i class="fas fa-check-circle"></i> Contoh: #stopvps|128.199.199.199<br>
+                        <br>
+                        <i class="fas fa-cloud"></i><strong> RESTART VPS</strong><br>
+                        <i class="fas fa-check-circle"></i> Format command restart: #restartvps|iprdpnya<br>
+                        <i class="fas fa-check-circle"></i> Contoh: #restartvps|128.199.199.199<br>
+                        <br>
+                        <i class="fas fa-exclamation-circle"></i><strong> NOTE</strong><br>
+                        <i class="fas fa-check-circle"></i> Fungsi ini untuk melakukan start, stop dan restart pada RDP & VPS kamu. Misal rdp atau vps kamu tidak sengaja di shutdown, kamu bisa menyalakan kembali dengan fungsi #startrdp atau #startvps<br>
+                        <i class="fas fa-check-circle"></i> Pastikan setelah menjalankan fungsi fungsi diatas, tunggu sekitar 10 sampai 15 menit, lalu loginkan kembali. jika lebih dari 30 menit tidak bisa di akses, bisa kontak admin di #contact
+                    </p>
+                </div>
+            </li>
+            <li class="bg-white my-2 shadow-lg" x-data="accordion(5)">
+                <h2
+                    @click="handleClick()"
+                    class="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer"
+                >
+                    <span>CARA REBUILD RDP & VPS DI BOT WHATSAPP PEDIAWCH</span>
+                    <svg
+                        :class="handleRotate()"
+                        class="fill-current text-green-700 h-6 w-6 transform transition-transform duration-500"
+                        viewBox="0 0 20 20"
+                    >
+                        <path d="M13.962,8.885l-3.736,3.739c-0.086,0.086-0.201,0.13-0.314,0.13S9.686,12.71,9.6,12.624l-3.562-3.56C5.863,8.892,5.863,8.611,6.036,8.438c0.175-0.173,0.454-0.173,0.626,0l3.25,3.247l3.426-3.424c0.173-0.172,0.451-0.172,0.624,0C14.137,8.434,14.137,8.712,13.962,8.885 M18.406,10c0,4.644-3.763,8.406-8.406,8.406S1.594,14.644,1.594,10S5.356,1.594,10,1.594S18.406,5.356,18.406,10 M17.521,10c0-4.148-3.373-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.148,17.521,17.521,14.147,17.521,10"></path>
+                    </svg>
+                </h2>
+                <div
+                    x-ref="tab"
+                    :style="handleToggle()"
+                    class="border-l-2 border-green-600 overflow-hidden max-h-0 duration-500 transition-all"
+                >
+                    <p class="p-3 text-gray-900">
+                        <i class="fas fa-desktop"></i><strong> RDP</strong><br>
+                        <i class="fas fa-check-circle"></i> Format command: #rebuildrdp|iprdpnya|sistemoperasi<br>
+                        <i class="fas fa-check-circle"></i> Contoh: #rebuildrdp|128.199.199.199:50123|win2022<br>
+                        <br>
+                        <i class="fas fa-cloud"></i><strong> VPS</strong><br>
+                        <i class="fas fa-check-circle"></i> Format command: #rebuildvps|ipvpsnya|sistemoperasi<br>
+                        <i class="fas fa-check-circle"></i> Contoh: #rebuildvps|128.199.199.199|ubuntu22<br>
+                        <br>
+                        <i class="fas fa-exclamation-circle"></i><strong> NOTE</strong><br>
+                        <i class="fas fa-check-circle"></i> Fungsi ini untuk mengganti sistem operasi RDP dan VPS kamu. Misal pada RDP kamu tadinya windows 10, mau diganti ke windows 2022. begitu juga untuk VPS misal mau diganti ke ubuntu 22<br>
+                        <i class="fas fa-check-circle"></i> Fungsi ini tidak dikenakan biaya, pastikan lakukan rebuild dengan sewajarnya tanpa melakukan spam ya
+                    </p>
+                </div>
+            </li>
+            <li class="bg-white my-2 shadow-lg" x-data="accordion(6)">
+                <h2
+                    @click="handleClick()"
+                    class="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer"
+                >
+                    <span>KUMPULAN SEMUA PERINTAH DI BOT WHATSAPP PEDIAWCH</span>
+                    <svg
+                        :class="handleRotate()"
+                        class="fill-current text-green-700 h-6 w-6 transform transition-transform duration-500"
+                        viewBox="0 0 20 20"
+                    >
+                        <path d="M13.962,8.885l-3.736,3.739c-0.086,0.086-0.201,0.13-0.314,0.13S9.686,12.71,9.6,12.624l-3.562-3.56C5.863,8.892,5.863,8.611,6.036,8.438c0.175-0.173,0.454-0.173,0.626,0l3.25,3.247l3.426-3.424c0.173-0.172,0.451-0.172,0.624,0C14.137,8.434,14.137,8.712,13.962,8.885 M18.406,10c0,4.644-3.763,8.406-8.406,8.406S1.594,14.644,1.594,10S5.356,1.594,10,1.594S18.406,5.356,18.406,10 M17.521,10c0-4.148-3.373-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.148,17.521,17.521,14.147,17.521,10"></path>
+                    </svg>
+                </h2>
+                <div
+                    x-ref="tab"
+                    :style="handleToggle()"
+                    class="border-l-2 border-green-600 overflow-hidden max-h-0 duration-500 transition-all"
+                >
+                    <p class="p-3 text-gray-900">
+                        <i class="fas fa-check-circle"></i> <strong>#menu</strong>: Menu BOT<br>
+                     <i class="fas fa-check-circle"></i> <strong>#ceksaldo</strong>: Cek saldo akun kamu<br>
+                        <i class="fas fa-check-circle"></i> <strong>#tambahsaldo</strong>: Isi saldo akun kamu<br>
+                        <i class="fas fa-check-circle"></i> <strong>#rdp</strong>: Membuat rdp otomatis<br>
+                        <i class="fas fa-check-circle"></i> <strong>#deleterdp</strong>: Hapus rdp berdasarkan ip<br>
+                        <i class="fas fa-check-circle"></i> <strong>#recreaterdp</strong>: Membuat ulang rdp dengan mengganti ip baru (Kena potong saldo +1000)<br>
+                        <i class="fas fa-check-circle"></i> <strong>#restartrdp</strong>: Restart rdp kamu<br>
+                        <i class="fas fa-check-circle"></i> <strong>#startrdp</strong>: Mengaktifkan kembali rdp kamu jika sebelumnya di shutdown<br>
+                        <i class="fas fa-check-circle"></i> <strong>#stoprdp</strong>: Mematikan rdp kamu<br>
+                        <i class="fas fa-check-circle"></i> <strong>#rebuildrdp</strong>: Membuat ulang rdp dengan ip yang sama (Tidak kena potong saldo)<br>
+                        <i class="fas fa-check-circle"></i> <strong>#perpanjangrdp</strong>: Mengatur ip rdp kamu perpanjang otomatis atau tidak<br>
+                        <i class="fas fa-check-circle"></i> <strong>#deletevps</strong>: Hapus vps berdasarkan ip<br>
+                        <i class="fas fa-check-circle"></i> <strong>#recreatevps</strong>: Membuat ulang vps dengan mengganti ip baru (Kena potong saldo +1000)<br>
+                        <i class="fas fa-check-circle"></i> <strong>#restartvps</strong>: Restart vps kamu<br>
+                        <i class="fas fa-check-circle"></i> <strong>#rebuildvps</strong>: Membuat ulang vps dengan ip yang sama (Tidak kena potong saldo)<br>
+                        <i class="fas fa-check-circle"></i> <strong>#perpanjangvps</strong>: Mengatur ip vps kamu perpanjang otomatis atau tidak<br>
+                        <i class="fas fa-check-circle"></i> <strong>#startvps</strong>: Mengaktifkan kembali vps kamu jika sebelumnya di shutdown<br>
+                        <i class="fas fa-check-circle"></i> <strong>#stopvps</strong>: Mematikan vps kamu<br>
+                        <i class="fas fa-check-circle"></i> <strong>#listakun</strong>: Melihat semua akun rdp & vps kamu<br>
+                        <i class="fas fa-check-circle"></i> <strong>#listharga</strong>: Melihat harga rdp & vps berdasarkan size/spesifikasi<br>
+                        <i class="fas fa-check-circle"></i> <strong>#tosrdpvps</strong>: Aturan menggunakan rdp & vps (WAJIB DI BACA)<br>
+                        <i class="fas fa-check-circle"></i> <strong>#cekslot</strong>: Melihat ketersediaan slot rdp & vps<br>
+                        <i class="fas fa-check-circle"></i> <strong>#tac</strong>: Sarat & Ketentuan membuat rdp & vps di BOT WHATSAPP PEDIAWCH<br>
+                        <i class="fas fa-check-circle"></i> <strong>#contact</strong>: Kontak admin<br>
+                        <i class="fas fa-check-circle"></i> <strong>#cekvoucher</strong>: Melihat voucher gratis saldo (Jika ada)
+                    </p>
+                </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </main>
+    <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+      var overlay = document.getElementById('loadingOverlay');
+      overlay.style.opacity = '0'; // Mulai fade out
+      setTimeout(function() {
+        overlay.style.display = 'none'; // Hilangkan setelah fade out
+      }, 1000); // Tunggu transisi selesai
+    }, 2000); // Tampilkan overlay selama 2 detik, lalu mulai fade out
+  });
+
+      // Alpine.js initialization and accordion functionality
+      document.addEventListener('alpine:init', () => {
+        Alpine.store('accordion', {
+          tab: 0
+        });
+
+        Alpine.data('accordion', (idx) => ({
+          init() {
+            this.idx = idx;
+          },
+          idx: -1,
+          handleClick() {
+            this.$store.accordion.tab = this.$store.accordion.tab === this.idx ? 0 : this.idx;
+          },
+          handleRotate() {
+            return this.$store.accordion.tab === this.idx ? 'rotate-180' : '';
+          },
+          handleToggle() {
+            return this.$store.accordion.tab === this.idx ? `max-height: ${this.$refs.tab.scrollHeight}px` : '';
+          }
+        }));
+      });
+    </script>
+  </body>
+</html>

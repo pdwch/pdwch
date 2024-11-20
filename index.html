@@ -24,6 +24,19 @@
           opacity: 1; /* Set opasitas awal */
           transition: opacity 1s ease-in-out; /* Transisi opasitas */
         }
+
+        /* Pastikan elemen container memiliki lebar maksimal 100% dan bisa scroll secara horizontal jika konten melebihi lebar layar */
+        .flex.flex-col {
+          max-width: 100%;
+          overflow-x: auto; /* Tambahkan scroll horizontal */
+        }
+
+        /* Tambahkan padding pada elemen untuk memastikan teks tidak menempel pada tepi */
+        .p-3 {
+          padding: 1rem; /* Atur sesuai kebutuhan */
+          word-wrap: break-word; /* Memungkinkan kata-kata untuk dipotong dan dibungkus */
+          white-space: normal; /* Mengizinkan spasi putih untuk membungkus ke baris baru */
+        }
       </style>
   </head>
   <body class="h-screen bg-blue-50" style="background-color: #3d3d3d;">

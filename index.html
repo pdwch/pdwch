@@ -1,4 +1,3 @@
-<!-- component -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,7 +7,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <script defer src="https://unpkg.com/alpinejs@3.2.3/dist/cdn.min.js"></script>
     <link rel="icon" href="image/favicon.ico" type="image/x-icon">
-    <title>PDWCH</title> <!-- Ubah judul di sini -->
+    <title>PEDIAWCH</title>
     <style>
         #loadingOverlay {
           position: fixed;
@@ -21,21 +20,17 @@
           justify-content: center;
           align-items: center;
           z-index: 1000;
-          opacity: 1; /* Set opasitas awal */
-          transition: opacity 1s ease-in-out; /* Transisi opasitas */
+          opacity: 1;
+          transition: opacity 1s ease-in-out;
         }
-
-        /* Pastikan elemen container memiliki lebar maksimal 100% dan bisa scroll secara horizontal jika konten melebihi lebar layar */
         .flex.flex-col {
           max-width: 100%;
-          overflow-x: auto; /* Tambahkan scroll horizontal */
+          overflow-x: auto;
         }
-
-        /* Tambahkan padding pada elemen untuk memastikan teks tidak menempel pada tepi */
         .p-3 {
-          padding: 1rem; /* Atur sesuai kebutuhan */
-          word-wrap: break-word; /* Memungkinkan kata-kata untuk dipotong dan dibungkus */
-          white-space: normal; /* Mengizinkan spasi putih untuk membungkus ke baris baru */
+          padding: 1rem;
+          word-wrap: break-word;
+          white-space: normal;
         }
       </style>
   </head>
@@ -304,14 +299,13 @@
   document.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() {
       var overlay = document.getElementById('loadingOverlay');
-      overlay.style.opacity = '0'; // Mulai fade out
+      overlay.style.opacity = '0';
       setTimeout(function() {
-        overlay.style.display = 'none'; // Hilangkan setelah fade out
-      }, 1000); // Tunggu transisi selesai
-    }, 2000); // Tampilkan overlay selama 2 detik, lalu mulai fade out
-  });
+        overlay.style.display = 'none';
+        }, 1000);
+      }, 2000);
+      });
 
-      // Alpine.js initialization and accordion functionality
       document.addEventListener('alpine:init', () => {
         Alpine.store('accordion', {
           tab: 0
